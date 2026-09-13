@@ -1,0 +1,68 @@
+ALI HAMZA
+Full Stack Engineer & AI Agent Developer
+MERN Stack Developer | Application Developer | AI Agent Architect
+
+CONTACT
+Email: raialihamza32@gmail.com
+Phone / WhatsApp: +92 305 4099490
+LinkedIn: https://linkedin.com/in/rai-ali-hamza-12a414386
+GitHub: https://github.com/Alihamzaafzal
+
+PROFILE
+Full Stack Engineer and AI Agent Developer with 4+ years of experience shipping production web, mobile, and intelligent AI systems. Specialized in the MERN stack and Next.js, with strong expertise architecting autonomous AI agent workflows, LLM integrations (OpenAI / Anthropic Claude APIs), and RAG pipelines. Delivered fintech, real estate, marketplace, travel, and hospitality platforms end-to-end — from database design to cinematic 3D interfaces and production deployment.
+
+CORE SKILLS
+Frontend & 3D UI:
+React.js, Next.js, TypeScript, Tailwind CSS, Three.js (WebGL), GSAP, Framer Motion
+
+Backend & APIs:
+Node.js, Express.js, Laravel (PHP), REST, GraphQL, WebSockets, JWT/OAuth, RBAC
+
+AI Agents & LLM:
+LangChain, Agentic Workflows, Function Calling, OpenAI & Claude APIs, RAG, Python
+
+Mobile:
+Flutter & Dart (iOS/Android), Firebase, Offline Caching
+
+Databases & DevOps:
+MongoDB, MySQL, Git/GitHub, Vercel, Netlify, Postman, CI/CD
+
+EXPERIENCE
+Full Stack & AI Engineer — Freelance & Client Systems (2024 – Present)
+• Designed and engineered end-to-end web applications using the MERN stack and Next.js for international clients.
+• Architected autonomous AI agent workflows, LLM integrations, and RAG pipelines using OpenAI / Claude APIs.
+• Delivered cross-platform mobile apps with Flutter & Dart; managed scalable deployments on Vercel, Netlify, and cloud infrastructure.
+
+Web & Application Developer — Personal & Enterprise Products (2023 – 2024)
+• Developed full-stack web applications, Laravel/PHP backends, and custom REST API integrations.
+• Built high-performance client portals, WordPress sites, and database schemas with MySQL and MongoDB.
+• Focused on responsive UI/UX, SEO best practices, and performance optimization.
+
+EDUCATION
+BS, Computer Science — Baba Guru Nanak University, Nankana Sahib
+Completed – July 2026
+
+AVAILABILITY
+Open to Freelance, Contract & Full-time roles
+
+FEATURED PROJECTS
+1. SimpliFi Go (Fintech) — https://simplifigo.com/
+   Next.js multi-currency corporate cards & cross-border payments platform for GCC businesses; real-time spend analytics and compliance-focused UI.
+
+2. Insight 3D (3D Interactive SPA) — https://insight3d.netlify.app/
+   Immersive React SPA with Three.js WebGL models and GSAP camera choreography for interactive 3D data visualization.
+
+3. Pazvese (Marketplace / Laravel) — https://www.pazvese.com/
+   Full-featured Laravel/PHP/MySQL marketplace with role-based access control and optimized high-throughput queries.
+
+4. Real Software (Real Estate Tech) — https://testreal-olive.vercel.app/
+   Next.js + Tailwind CRM platform with agent websites, domain hosting, social scheduling, and Framer Motion transitions.
+
+5. Skybound Flights (Travel & Hospitality) — https://www.skyboundflights.com/
+   React travel booking platform with flight/hotel search, real-time itineraries, and mobile-first reservation flow.
+
+OTHER PROJECTS
+• Technofy: https://technofy-projects.vercel.app/
+• Johnstown Courier: https://johnstowncourier.com/
+• QACA House: https://www.qaca.asia/
+• Flame & Grill: https://flamegrill.leadlife.net/

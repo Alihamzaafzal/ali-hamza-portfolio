@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#030507"/>
+  <circle cx="620" cy="250" r="170" fill="url(#globe)" />
+  <defs>
+    <radialGradient id="globe" cx="0.35" cy="0.35" r="0.65">
+      <stop stop-color="#32C5FF" stop-opacity="0.55"/>
+      <stop offset="0.55" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FF2E88" stop-opacity="0.15"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="620" cy="250" rx="210" ry="50" stroke="#8B5CF6" stroke-opacity="0.45" stroke-width="2"/>
+  <ellipse cx="620" cy="250" rx="250" ry="70" stroke="#FF2E88" stroke-opacity="0.3" stroke-width="1.5" transform="rotate(24 620 250)"/>
+  <rect x="60" y="120" width="340" height="220" rx="18" fill="#050505" fill-opacity="0.7" stroke="#8B5CF6" stroke-opacity="0.35"/>
+  <rect x="90" y="155" width="180" height="16" rx="8" fill="#FF2E88" fill-opacity="0.75"/>
+  <rect x="90" y="195" width="260" height="10" rx="5" fill="#ffffff" fill-opacity="0.22"/>
+  <rect x="90" y="220" width="220" height="10" rx="5" fill="#ffffff" fill-opacity="0.16"/>
+  <rect x="90" y="270" width="110" height="38" rx="19" fill="url(#cta)"/>
+  <defs>
+    <linearGradient id="cta" x1="90" y1="270" x2="200" y2="308">
+      <stop stop-color="#FF2E88"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <text x="60" y="430" fill="#ffffff" fill-opacity="0.92" font-family="system-ui,sans-serif" font-size="38" font-weight="700">Developer Portfolio</text>
+  <text x="60" y="465" fill="#8B5CF6" fill-opacity="0.9" font-family="system-ui,sans-serif" font-size="18">React � Three.js � GSAP</text>
+</svg>

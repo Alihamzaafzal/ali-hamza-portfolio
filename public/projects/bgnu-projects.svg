@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0B0A09"/>
+  <rect width="800" height="500" fill="url(#g2)" opacity="0.95"/>
+  <defs>
+    <linearGradient id="g2" x1="100" y1="0" x2="700" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54C5F8" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <rect x="250" y="60" width="300" height="380" rx="36" fill="#141210" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+  <rect x="275" y="95" width="250" height="14" rx="7" fill="#54C5F8" fill-opacity="0.75"/>
+  <rect x="275" y="130" width="200" height="8" rx="4" fill="#ffffff" fill-opacity="0.2"/>
+  <rect x="275" y="180" width="250" height="64" rx="12" fill="#8B5CF6" fill-opacity="0.25"/>
+  <rect x="275" y="260" width="250" height="64" rx="12" fill="#FF2E88" fill-opacity="0.2"/>
+  <rect x="275" y="340" width="250" height="64" rx="12" fill="#32C5FF" fill-opacity="0.18"/>
+  <text x="80" y="430" fill="#ffffff" fill-opacity="0.92" font-family="system-ui,sans-serif" font-size="40" font-weight="700">BGNU Projects</text>
+  <text x="80" y="465" fill="#54C5F8" fill-opacity="0.9" font-family="system-ui,sans-serif" font-size="18">Flutter � Mobile Hub</text>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0a0909"/>
+  <rect width="800" height="500" fill="url(#g3)" opacity="0.85"/>
+  <defs>
+    <linearGradient id="g3" x1="0" y1="500" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#47A248" stop-opacity="0.25"/>
+      <stop offset="0.5" stop-color="#68A063" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#32C5FF" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <rect x="70" y="80" width="660" height="300" rx="14" fill="#141210" stroke="#ffffff" stroke-opacity="0.1"/>
+  <rect x="70" y="80" width="660" height="48" rx="14" fill="#1c1916"/>
+  <circle cx="98" cy="104" r="7" fill="#FF2E88" fill-opacity="0.8"/>
+  <circle cx="122" cy="104" r="7" fill="#8B5CF6" fill-opacity="0.7"/>
+  <circle cx="146" cy="104" r="7" fill="#32C5FF" fill-opacity="0.7"/>
+  <rect x="110" y="160" width="220" height="180" rx="10" fill="#050505" stroke="#47A248" stroke-opacity="0.35"/>
+  <rect x="360" y="160" width="330" height="80" rx="10" fill="#8B5CF6" fill-opacity="0.22"/>
+  <rect x="360" y="260" width="330" height="80" rx="10" fill="#32C5FF" fill-opacity="0.18"/>
+  <text x="70" y="430" fill="#ffffff" fill-opacity="0.92" font-family="system-ui,sans-serif" font-size="38" font-weight="700">MERN Platform</text>
+  <text x="70" y="465" fill="#47A248" fill-opacity="0.9" font-family="system-ui,sans-serif" font-size="18">React � Node � MongoDB</text>
+</svg>

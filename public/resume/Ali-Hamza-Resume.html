@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali Hamza - Resume | Full Stack Engineer & AI Agent Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --navy: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --light-bg: #f8fafc;
+      --border: #e2e8f0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: #e2e8f0;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+    .resume-page {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    /* Header */
+    .header {
+      background: #091e36;
+      color: #ffffff;
+      padding: 2.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .header-left h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+      color: #ffffff;
+    }
+    .header-left .role {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 0.35rem;
+    }
+    .header-left .subrole {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-weight: 500;
+      font-style: italic;
+    }
+    .header-contact {
+      text-align: right;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .header-contact a {
+      color: #e2e8f0;
+      text-decoration: none;
+      display: block;
+      transition: color 0.15s;
+    }
+    .header-contact a:hover {
+      color: #38bdf8;
+    }
+    .header-contact .phone {
+      color: #94a3b8;
+    }
+    /* Grid Body */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 900px;
+    }
+    /* Left Sidebar */
+    .sidebar {
+      background: #f8fafc;
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.8rem;
+    }
+    .side-section {
+      margin-bottom: 1.8rem;
+    }
+    .side-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 0.35rem;
+      margin-bottom: 0.9rem;
+    }
+    .skill-group {
+      margin-bottom: 1rem;
+    }
+    .skill-group h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 0.2rem;
+    }
+    .skill-group p {
+      font-size: 0.8rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .edu-item h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .edu-item p {
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+    .edu-item .edu-date {
+      color: #0284c7;
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+    .badge-avail {
+      display: inline-block;
+      font-size: 0.78rem;
+      color: #166534;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .side-links a {
+      display: block;
+      font-size: 0.82rem;
+      color: #0284c7;
+      text-decoration: none;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    /* Main Column */
+    .main-col {
+      padding: 2rem 2.2rem;
+    }
+    .section-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .profile-p {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+    .exp-item {
+      margin-bottom: 1.4rem;
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+    .exp-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .exp-date {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-style: italic;
+    }
+    .exp-bullets {
+      list-style-type: disc;
+      padding-left: 1.2rem;
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .exp-bullets li {
+      margin-bottom: 0.25rem;
+    }
+    .proj-item {
+      margin-bottom: 1rem;
+    }
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.15rem;
+    }
+    .proj-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .proj-title span {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .proj-link {
+      font-size: 0.78rem;
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .proj-desc {
+      font-size: 0.81rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .other-proj {
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .other-proj a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .resume-page {
+        box-shadow: none;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="no-print" style="max-width:860px; margin:0 auto 1rem auto; text-align:right;">
+    <button onclick="window.print()" style="background:#0284c7; color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.88rem;">Print / Save as PDF</button>
+  </div>
+
+  <div class="resume-page">
+    <header class="header">
+      <div class="header-left">
+        <h1>Ali Hamza</h1>
+        <div class="role">Full Stack Engineer & AI Agent Developer</div>
+        <div class="subrole">MERN Stack Developer | Application Developer | AI Agent Architect</div>
+      </div>
+      <div class="header-contact">
+        <a href="mailto:raialihamza32@gmail.com">raialihamza32@gmail.com</a>
+        <div class="phone">+92 305 4099490 (WhatsApp / Phone)</div>
+        <a href="https://linkedin.com/in/rai-ali-hamza-12a414386" target="_blank">linkedin.com/in/rai-ali-hamza-12a414386</a>
+        <a href="https://github.com/Alihamzaafzal" target="_blank">github.com/Alihamzaafzal</a>
+      </div>
+    </header>
+
+    <div class="body-grid">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <section class="side-section">
+          <h3 class="side-title">Core Skills</h3>
+          
+          <div class="skill-group">
+            <h4>Frontend & 3D UI</h4>
+            <p>React.js, Next.js, TypeScript, Tailwind CSS, Three.js (WebGL), GSAP, Framer Motion</p>
+          </div>
+
+          <div class="skill-group">
+            <h4>Backend & APIs</h4>
+            <p>Node.js, Express.js, Laravel (PHP), REST, GraphQL, WebSockets, JWT/OAuth, RBAC</p>
+          </div>
+
+          <div class="skill-group">
+            <h4>AI Agents & LLM</h4>
+            <p>LangChain, Agentic Workflows, Function Calling, OpenAI & Claude APIs, RAG, Python</p>
+          </div>
+
+          <div class="skill-group">
+            <h4>Mobile</h4>
+            <p>Flutter & Dart (iOS/Android), Firebase, Offline Caching</p>
+          </div>
+
+          <div class="skill-group">
+            <h4>Databases & DevOps</h4>
+            <p>MongoDB, MySQL, Git/GitHub, Vercel, Netlify, Postman, CI/CD</p>
+          </div>
+        </section>
+
+        <section class="side-section">
+          <h3 class="side-title">Education</h3>
+          <div class="edu-item">
+            <h4>BS, Computer Science</h4>
+            <p>Baba Guru Nanak University, Nankana Sahib</p>
+            <p class="edu-date">Completed – July 2026</p>
+          </div>
+        </section>
+
+        <section class="side-section">
+          <h3 class="side-title">Availability</h3>
+          <span class="badge-avail">Open to Freelance, Contract & Full-time roles</span>
+        </section>
+
+        <section class="side-section">
+          <h3 class="side-title">Links</h3>
+          <div class="side-links">
+            <a href="https://github.com/Alihamzaafzal" target="_blank">GitHub Portfolio</a>
+            <a href="https://linkedin.com/in/rai-ali-hamza-12a414386" target="_blank">LinkedIn Profile</a>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Main Column -->
+      <main class="main-col">
+        <section style="margin-bottom: 1.8rem;">
+          <h2 class="section-title">Profile</h2>
+          <p class="profile-p">
+            Full Stack Engineer and AI Agent Developer with 4+ years of experience shipping production web, mobile, and intelligent AI systems. Specialized in the MERN stack and Next.js, with strong expertise architecting autonomous AI agent workflows, LLM integrations (OpenAI / Anthropic Claude APIs), and RAG pipelines. Delivered fintech, real estate, marketplace, travel, and hospitality platforms end-to-end — from database design to cinematic 3D interfaces and production deployment.
+          </p>
+        </section>
+
+        <section style="margin-bottom: 1.8rem;">
+          <h2 class="section-title">Experience</h2>
+          
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-title">Full Stack & AI Engineer — Freelance & Client Systems</span>
+              <span class="exp-date">2024 – Present</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Designed and engineered end-to-end web applications using the MERN stack and Next.js for international clients.</li>
+              <li>Architected autonomous AI agent workflows, LLM integrations, and RAG pipelines using OpenAI / Claude APIs.</li>
+              <li>Delivered cross-platform mobile apps with Flutter & Dart; managed scalable deployments on Vercel, Netlify, and cloud infrastructure.</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-title">Web & Application Developer — Personal & Enterprise Products</span>
+              <span class="exp-date">2023 – 2024</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Developed full-stack web applications, Laravel/PHP backends, and custom REST API integrations.</li>
+              <li>Built high-performance client portals, WordPress sites, and database schemas with MySQL and MongoDB.</li>
+              <li>Focused on responsive UI/UX, SEO best practices, and performance optimization.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Featured Projects</h2>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <div class="proj-title">SimpliFi Go <span>(Fintech)</span></div>
+              <a class="proj-link" href="https://simplifigo.com/" target="_blank">Visit Site &rarr;</a>
+            </div>
+            <p class="proj-desc">Next.js multi-currency corporate cards & cross-border payments platform for GCC businesses; real-time spend analytics and compliance-focused UI.</p>
+          </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <div class="proj-title">Insight 3D <span>(3D Interactive SPA)</span></div>
+              <a class="proj-link" href="https://insight3d.netlify.app/" target="_blank">Visit Site &rarr;</a>
+            </div>
+            <p class="proj-desc">Immersive React SPA with Three.js WebGL models and GSAP camera choreography for interactive 3D data visualization.</p>
+          </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <div class="proj-title">Pazvese <span>(Marketplace / Laravel)</span></div>
+              <a class="proj-link" href="https://www.pazvese.com/" target="_blank">Visit Site &rarr;</a>
+            </div>
+            <p class="proj-desc">Full-featured Laravel/PHP/MySQL marketplace with role-based access control and optimized high-throughput queries.</p>
+          </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <div class="proj-title">Real Software <span>(Real Estate Tech)</span></div>
+              <a class="proj-link" href="https://testreal-olive.vercel.app/" target="_blank">Visit Site &rarr;</a>
+            </div>
+            <p class="proj-desc">Next.js + Tailwind CRM platform with agent websites, domain hosting, social scheduling, and Framer Motion transitions.</p>
+          </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <div class="proj-title">Skybound Flights <span>(Travel & Hospitality)</span></div>
+              <a class="proj-link" href="https://www.skyboundflights.com/" target="_blank">Visit Site &rarr;</a>
+            </div>
+            <p class="proj-desc">React travel booking platform with flight/hotel search, real-time itineraries, and mobile-first reservation flow.</p>
+          </div>
+
+          <div style="margin-top: 1.4rem;">
+            <h3 style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; color: #0f172a; margin-bottom: 0.4rem;">Other Projects</h3>
+            <p class="other-proj">
+              <a href="https://technofy-projects.vercel.app/" target="_blank">Technofy (Visit)</a> &nbsp;|&nbsp;
+              <a href="https://johnstowncourier.com/" target="_blank">Johnstown Courier (Visit)</a> &nbsp;|&nbsp;
+              <a href="https://www.qaca.asia/" target="_blank">QACA House (Visit)</a> &nbsp;|&nbsp;
+              <a href="https://flamegrill.leadlife.net/" target="_blank">Flame & Grill (Visit)</a>
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
