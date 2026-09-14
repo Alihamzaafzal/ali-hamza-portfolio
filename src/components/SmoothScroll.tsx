@@ -17,6 +17,14 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      allowNestedScroll: true,
+      prevent: (node) => {
+        return (
+          node instanceof HTMLElement &&
+          (node.hasAttribute('data-lenis-prevent') ||
+            Boolean(node.closest?.('[data-lenis-prevent]')))
+        );
+      },
     });
 
     setLenis(instance);

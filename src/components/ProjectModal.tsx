@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, ShieldCheck, Layers, Sparkles, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import type { ProjectData } from './ProjectCard';
@@ -9,6 +9,8 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const modalCardRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!project) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -25,7 +27,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
     <AnimatePresence>
       {project && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-10">
+        <div
+          data-lenis-prevent="true"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-10"
+          onWheel={(e) => {
+            e.stopPropagation();
+            if (modalCardRef.current && !modalCardRef.current.contains(e.target as Node)) {
+              modalCardRef.current.scrollTop += e.deltaY;
+            }
+          }}
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -38,12 +49,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Modal Card */}
           <motion.div
+            ref={modalCardRef}
             initial={{ opacity: 0, scale: 0.94, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 20 }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-white/15 bg-[#0C0E14] shadow-[0_32px_80px_rgba(0,0,0,0.85)] custom-scrollbar"
+            data-lenis-prevent="true"
+            className="relative z-10 max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-white/15 bg-[#0C0E14] shadow-[0_32px_80px_rgba(0,0,0,0.85)] custom-scrollbar overscroll-contain"
             onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => e.stopPropagation()}
           >
             {/* Specular Edge Highlight */}
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />

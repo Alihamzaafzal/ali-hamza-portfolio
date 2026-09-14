@@ -28,6 +28,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [muted, setMuted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resultsListRef = useRef<HTMLDivElement>(null);
   const { scrollTo } = useScrollNav();
 
   useEffect(() => {
@@ -45,6 +46,15 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
       document.body.style.overflow = '';
     }
   }, [isOpen]);
+
+  // Keep selected item visible when navigating with arrow keys
+  useEffect(() => {
+    if (!resultsListRef.current) return;
+    const selectedEl = resultsListRef.current.children[selectedIndex] as HTMLElement | undefined;
+    if (selectedEl) {
+      selectedEl.scrollIntoView({ block: 'nearest' });
+    }
+  }, [selectedIndex]);
 
   // Command items
   const items = useMemo(() => {
@@ -137,7 +147,16 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[120] flex items-start justify-center pt-20 px-4 sm:px-6">
+        <div
+          data-lenis-prevent="true"
+          className="fixed inset-0 z-[120] flex items-start justify-center pt-20 px-4 sm:px-6"
+          onWheel={(e) => {
+            e.stopPropagation();
+            if (resultsListRef.current && !resultsListRef.current.contains(e.target as Node)) {
+              resultsListRef.current.scrollTop += e.deltaY;
+            }
+          }}
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -153,7 +172,15 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            data-lenis-prevent="true"
             className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-white/15 bg-[#0D1017] shadow-[0_24px_70px_rgba(0,0,0,0.85)]"
+            onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => {
+              e.stopPropagation();
+              if (resultsListRef.current && !resultsListRef.current.contains(e.target as Node)) {
+                resultsListRef.current.scrollTop += e.deltaY;
+              }
+            }}
           >
             {/* Top Search Input */}
             <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
@@ -179,7 +206,12 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             </div>
 
             {/* Results List */}
-            <div className="max-h-[60vh] overflow-y-auto p-2 space-y-1 custom-scrollbar">
+            <div
+              ref={resultsListRef}
+              data-lenis-prevent="true"
+              className="max-h-[60vh] overflow-y-auto p-2 space-y-1 custom-scrollbar overscroll-contain"
+              onWheel={(e) => e.stopPropagation()}
+            >
               {filtered.length === 0 ? (
                 <div className="py-10 text-center text-sm text-[#A0AEC0]">
                   No matching commands or projects found.
