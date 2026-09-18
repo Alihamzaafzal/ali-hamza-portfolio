@@ -13,6 +13,8 @@ import {
   Layers,
   Briefcase,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { projects, personalInfo } from '../data/portfolio';
 import { useScrollNav } from '../hooks/useScrollNav';
@@ -21,9 +23,20 @@ import { playClickSound, playChimeSound, toggleAudioMute, isAudioMuted } from '.
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenTerminal?: () => void;
+  onOpenAiCopilot?: () => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 }
 
-export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
+export default function CommandPalette({
+  isOpen,
+  onClose,
+  onOpenTerminal,
+  onOpenAiCopilot,
+  theme = 'dark',
+  onToggleTheme,
+}: CommandPaletteProps) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [muted, setMuted] = useState(false);
@@ -58,6 +71,43 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
 
   // Command items
   const items = useMemo(() => {
+    const aiAndTools = [
+      {
+        id: 'tool-ai-copilot',
+        label: 'Chat with Hamza AI Copilot',
+        category: 'AI & Developer Tools',
+        icon: Sparkles,
+        action: () => {
+          onClose();
+          onOpenAiCopilot?.();
+        },
+      },
+      {
+        id: 'tool-terminal',
+        label: 'Open Interactive Developer CLI Terminal',
+        category: 'AI & Developer Tools',
+        icon: Briefcase,
+        action: () => {
+          onClose();
+          onOpenTerminal?.();
+        },
+      },
+      {
+        id: 'nav-workflow',
+        label: 'Inspect Autonomous AI Agent Workflow Lab',
+        category: 'AI & Developer Tools',
+        icon: Layers,
+        action: () => scrollTo('#agent-playground'),
+      },
+      {
+        id: 'nav-calculator',
+        label: 'Calculate Project Scope & Estimated Budget',
+        category: 'AI & Developer Tools',
+        icon: FolderGit2,
+        action: () => scrollTo('#project-calculator'),
+      },
+    ];
+
     const navItems = [
       { id: 'nav-hero', label: 'Go to Hero & Overview', category: 'Navigation', icon: Sparkles, action: () => scrollTo('#hero') },
       { id: 'nav-about', label: 'Go to Biography & Philosophy', category: 'Navigation', icon: FileText, action: () => scrollTo('#about') },
@@ -104,10 +154,20 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
           setMuted(next);
         },
       },
+      {
+        id: 'act-theme',
+        label: theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+        category: 'Quick Actions',
+        icon: theme === 'dark' ? Sun : Moon,
+        action: () => {
+          onClose();
+          onToggleTheme?.();
+        },
+      },
     ];
 
-    return [...navItems, ...projectItems, ...actionItems];
-  }, [scrollTo, muted]);
+    return [...aiAndTools, ...navItems, ...projectItems, ...actionItems];
+  }, [scrollTo, muted, onClose, onOpenTerminal, onOpenAiCopilot, theme, onToggleTheme]);
 
   const filtered = useMemo(() => {
     if (!query.trim()) return items;

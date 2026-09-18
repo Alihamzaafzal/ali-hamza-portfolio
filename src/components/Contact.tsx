@@ -19,11 +19,21 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
-export default function Contact() {
+export default function Contact({
+  prefillMessage,
+}: {
+  prefillMessage?: string;
+} = {}) {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [localTime, setLocalTime] = useState('');
+
+  useEffect(() => {
+    if (prefillMessage) {
+      setFormData((prev) => ({ ...prev, message: prefillMessage }));
+    }
+  }, [prefillMessage]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -47,6 +57,20 @@ export default function Contact() {
     navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const applyTemplate = (templateType: 'ai-agent' | 'fullstack' | 'mobile' | 'consulting') => {
+    let msg = '';
+    if (templateType === 'ai-agent') {
+      msg = `Hi Ali,\nI am looking to architect an autonomous AI agent system.\n• Domain / Problem:\n• Integrations (APIs / Vector DB / LLM):\n• Target Timeline:\n• Approximate Budget:`;
+    } else if (templateType === 'fullstack') {
+      msg = `Hi Ali,\nWe are planning to build a modern full-stack web platform.\n• Tech Preferences (React / Next.js / Node):\n• Core Features Needed:\n• Target Launch Date:`;
+    } else if (templateType === 'mobile') {
+      msg = `Hi Ali,\nWe need a cross-platform mobile application built with Flutter.\n• Target Platforms (iOS + Android):\n• Key Features (Offline Sync / Auth / Payments):\n• Timeline:`;
+    } else {
+      msg = `Hi Ali,\nI would like to book you for technical advisory / full-time role discussion.\n• Organization:\n• Role / Scope:\n• Timezone & Availability needed:`;
+    }
+    setFormData((prev) => ({ ...prev, message: msg }));
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -255,17 +279,50 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-xs font-medium text-[#A0AEC0] uppercase tracking-wider mb-2">
-                    Project Scope &amp; Deliverables
-                  </label>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <label htmlFor="contact-message" className="block text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">
+                      Project Scope &amp; Deliverables
+                    </label>
+                    <div className="flex items-center gap-1.5 overflow-x-auto text-[10px]">
+                      <span className="text-gray-500 hidden sm:inline">Templates:</span>
+                      <button
+                        type="button"
+                        onClick={() => applyTemplate('ai-agent')}
+                        className="rounded-md border border-cyan-500/30 bg-cyan-950/30 px-2 py-0.5 text-cyan-300 hover:bg-cyan-500/20 transition cursor-pointer"
+                      >
+                        🤖 AI Agent
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => applyTemplate('fullstack')}
+                        className="rounded-md border border-fuchsia-500/30 bg-fuchsia-950/30 px-2 py-0.5 text-fuchsia-300 hover:bg-fuchsia-500/20 transition cursor-pointer"
+                      >
+                        🌐 Full-Stack
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => applyTemplate('mobile')}
+                        className="rounded-md border border-emerald-500/30 bg-emerald-950/30 px-2 py-0.5 text-emerald-300 hover:bg-emerald-500/20 transition cursor-pointer"
+                      >
+                        📱 Mobile App
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => applyTemplate('consulting')}
+                        className="rounded-md border border-amber-500/30 bg-amber-950/30 px-2 py-0.5 text-amber-300 hover:bg-amber-500/20 transition cursor-pointer"
+                      >
+                        ⚡ Advisory
+                      </button>
+                    </div>
+                  </div>
                   <textarea
                     id="contact-message"
                     required
-                    rows={4}
+                    rows={5}
                     placeholder="Tell me about your product, tech stack requirements, timeline, or objectives..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full rounded-xl border border-white/10 bg-[#0C0C0C] px-4 py-3 text-sm text-white placeholder-white/25 focus:border-[#00F0FF] focus:outline-none focus:ring-1 focus:ring-[#00F0FF]"
+                    className="w-full rounded-xl border border-white/10 bg-[#0C0C0C] px-4 py-3 text-sm text-white placeholder-white/25 focus:border-[#00F0FF] focus:outline-none focus:ring-1 focus:ring-[#00F0FF] font-sans"
                   />
                 </div>
 

@@ -488,18 +488,53 @@ main > .site-section:first-child {
   }
 }
 
-/* ═══ #3: Animated Gradient Section Divider ═══ */
+/* ═══ #3: Section Divider — Cinematic Laser Sweep ═══ */
 .section-divider {
+  position: relative;
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, #D946EF, #8B5CF6, #06B6D4, #00F0FF);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  background: linear-gradient(90deg, transparent 0%, rgba(0,240,255,0.3) 30%, rgba(217,70,239,0.3) 70%, transparent 100%);
+  overflow: visible;
 }
 
-.section-divider.visible {
+.section-divider::before {
+  content: '';
+  position: absolute;
+  inset: -0.5px 0;
+  background: linear-gradient(90deg, transparent 0%, #D946EF 15%, #8B5CF6 35%, #06B6D4 60%, #00F0FF 80%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 6px rgba(0,240,255,0.8)) drop-shadow(0 0 14px rgba(217,70,239,0.5));
+}
+
+/* The bright traveling "laser dot" sweeper */
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -6px;
+  width: 12px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px 4px rgba(0,240,255,0.9), 0 0 20px 8px rgba(217,70,239,0.5);
+  opacity: 0;
+  transition: opacity 0.01s;
+}
+
+.section-divider.visible::before {
   transform: scaleX(1);
+}
+
+.section-divider.visible::after {
+  animation: laser-dot-sweep 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.02s both;
+}
+
+@keyframes laser-dot-sweep {
+  from { left: 0%; opacity: 1; }
+  95%  { opacity: 1; }
+  to   { left: calc(100% - 6px); opacity: 0; }
 }
 
 /* ═══ #4: Project Card 3D Tilt ═══ */
@@ -853,3 +888,294 @@ main > .site-section:first-child {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══ ROUND 2: Odometer Rolling Digit ═══ */
+.odometer-digit {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1;
+}
+
+.odometer-column {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.9s cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: transform;
+}
+
+/* ═══ ROUND 2: Cursor Trailing Ring ═══ */
+.cursor-trail-ring {
+  pointer-events: none;
+  position: fixed;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.45);
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.25s ease;
+  mix-blend-mode: screen;
+}
+
+/* ═══ ROUND 2: Radial Arc Skill Gauge ═══ */
+.arc-gauge-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-linecap: round;
+}
+
+.arc-gauge-fill {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: stroke-dashoffset;
+}
+
+/* ═══ ROUND 2: Timeline Node Expanded Ring ═══ */
+@keyframes node-ring-expand {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.timeline-node-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.7);
+  animation: node-ring-expand 2s ease-out infinite;
+}
+
+.timeline-node-ring-2 {
+  animation-delay: 0.8s;
+}
+
+/* ═══ ROUND 2: Stat glow pill ═══ */
+.stat-glow-pill {
+  position: relative;
+}
+
+.stat-glow-pill::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--border-angle), transparent 0%, rgba(0,240,255,0.7) 25%, rgba(217,70,239,0.7) 50%, rgba(16,185,129,0.7) 75%, transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  animation: spin-border-angle 3.5s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-glow-pill:hover::after {
+  opacity: 1;
+}
+
+/* ═══ ROUND 2: Footer ═══ */
+@keyframes footer-orb-breathe {
+  0%, 100% { transform: scale(1) translate(-50%, -50%); opacity: 0.35; }
+  50%       { transform: scale(1.08) translate(-50%, -50%); opacity: 0.55; }
+}
+
+.footer-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: footer-orb-breathe 10s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ═══ ROUND 2: Availability Badge Pulse ═══ */
+@keyframes avail-ring-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+  100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.avail-badge {
+  animation: avail-ring-pulse 2.5s infinite;
+}
+
+/* ═══ ROUND 2: Testimonial Carousel ═══ */
+.testimonials-carousel-track {
+  display: flex;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ═══ ROUND 2: Loading Progress Ring ═══ */
+.loader-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+}
+
+.loader-ring-fill {
+  fill: none;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset 0.06s linear;
+}
+
+/* ═══ ROUND 2: Project Live Preview Tooltip ═══ */
+.preview-tooltip {
+  pointer-events: none;
+  position: absolute;
+  z-index: 50;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #111318;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,240,255,0.1);
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.33,1,0.68,1);
+  opacity: 0;
+  transform: scale(0.92) translateY(6px);
+}
+
+.preview-tooltip.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ═══ LUXURY LIGHT THEME SYSTEM ═══ */
+html.light-mode {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light-mode body {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light-mode #root {
+  background: #F8FAFC !important;
+}
+
+html.light-mode .page-bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6, 182, 212, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(217, 70, 239, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 15% 60%, rgba(16, 185, 129, 0.06), transparent),
+    #F8FAFC !important;
+}
+
+html.light-mode .noise-overlay {
+  opacity: 0.02 !important;
+}
+
+html.light-mode .site-section {
+  background: #F8FAFC !important;
+  border-top-color: rgba(15, 23, 42, 0.07) !important;
+}
+
+html.light-mode .hero-heading {
+  background: linear-gradient(180deg, #0F172A 0%, #1E293B 60%, #334155 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+html.light-mode .gradient-text-premium {
+  background: linear-gradient(120deg, #0F172A 0%, #334155 50%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+html.light-mode .glass,
+html.light-mode .profile-card,
+html.light-mode .holo-card-ref,
+html.light-mode .spotlight-card,
+html.light-mode [class*="bg-[#111318]"],
+html.light-mode [class*="bg-[#0C0C0C]"],
+html.light-mode [class*="bg-[#0a0a0a]"],
+html.light-mode [class*="bg-[#14171D]"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+html.light-mode nav {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06) !important;
+}
+
+html.light-mode footer {
+  background-color: #F1F5F9 !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light-mode footer p,
+html.light-mode footer a {
+  color: #475569 !important;
+}
+
+html.light-mode footer a:hover {
+  color: #0F172A !important;
+}
+
+html.light-mode .text-white:not(
+  .btn-glow-magenta *,
+  .btn-cosmic-berry *,
+  .avail-badge *,
+  .loader-char,
+  .terminal-window *
+) {
+  color: #0F172A !important;
+}
+
+html.light-mode [class*="text-[#B0BEC5]"],
+html.light-mode [class*="text-[#A0AEC0]"],
+html.light-mode [class*="text-[#D7E2EA]"],
+html.light-mode [class*="text-[#889098]"],
+html.light-mode .text-muted {
+  color: #475569 !important;
+}
+
+html.light-mode [class*="border-white/10"],
+html.light-mode [class*="border-white/12"],
+html.light-mode [class*="border-white/15"],
+html.light-mode [class*="border-white/8"],
+html.light-mode [class*="border-white/20"],
+html.light-mode [class*="border-white/25"] {
+  border-color: rgba(15, 23, 42, 0.09) !important;
+}
+
+html.light-mode [class*="bg-white/[0.04]"],
+html.light-mode [class*="bg-white/5"],
+html.light-mode [class*="bg-white/10"] {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+html.light-mode input,
+html.light-mode textarea {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+html.light-mode .command-palette-container {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light-mode .command-palette-item {
+  color: #1E293B !important;
+}
+
+html.light-mode .command-palette-item.selected {
+  background-color: rgba(6, 182, 212, 0.1) !important;
+}
+

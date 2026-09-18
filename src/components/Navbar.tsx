@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, type MouseEvent } from 'react';
 import { motion } from 'framer-motion';
-import { FileDown, ArrowUpRight, Command, Volume2, VolumeX } from 'lucide-react';
+import { FileDown, ArrowUpRight, Command, Volume2, VolumeX, Terminal as TerminalIcon, Sun, Moon } from 'lucide-react';
 import { navLinks, personalInfo } from '../data/portfolio';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { useScrollNav } from '../hooks/useScrollNav';
@@ -10,8 +10,14 @@ const SECTION_IDS = ['hero', ...navLinks.map((l) => l.href.replace('#', ''))];
 
 export default function Navbar({
   onOpenCommandPalette,
+  onOpenTerminal,
+  theme = 'dark',
+  onToggleTheme,
 }: {
   onOpenCommandPalette?: () => void;
+  onOpenTerminal?: () => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 } = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,14 +84,25 @@ export default function Navbar({
         aria-label="Main navigation"
       >
         <div className="flex items-center justify-between gap-4">
-          {/* Brand with vibrant cyan dot */}
-          <a
-            href="#hero"
-            className="font-syne text-base font-bold tracking-tight text-white transition hover:opacity-80"
-            onClick={(e) => handleNavClick(e, '#hero')}
-          >
-            ALI HAMZA<span className="text-[#00F0FF]">.</span>
-          </a>
+          {/* Brand + Open to Work badge */}
+          <div className="flex items-center gap-2.5">
+            <a
+              href="#hero"
+              className="font-syne text-base font-bold tracking-tight text-white transition hover:opacity-80"
+              onClick={(e) => handleNavClick(e, '#hero')}
+            >
+              ALI HAMZA<span className="text-[#00F0FF]">.</span>
+            </a>
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="avail-badge hidden sm:inline-flex items-center gap-1 rounded-full border border-[#10B981]/30 bg-[#10B981]/10 px-2.5 py-0.5 text-[10px] font-semibold text-[#34D399] transition hover:bg-[#10B981]/20"
+              title="Click to get in touch"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse shrink-0" />
+              Open to Projects
+            </a>
+          </div>
 
           {/* Nav Links */}
           <ul className="hidden items-center gap-7 lg:flex">
@@ -119,12 +136,28 @@ export default function Navbar({
                 onOpenCommandPalette?.();
                 playClickSound();
               }}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.04] px-3 py-1.5 text-xs text-[#A0AEC0] transition hover:border-[#00F0FF]/40 hover:text-white active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.04] px-3 py-1.5 text-xs text-[#A0AEC0] transition hover:border-[#00F0FF]/40 hover:text-white active:scale-95 cursor-pointer"
               title="Search & Command Menu (Ctrl+K)"
             >
               <Command className="h-3 w-3 text-[#00F0FF]" />
               <span className="font-mono text-[10px]">Ctrl K</span>
             </button>
+
+            {/* Developer Terminal Trigger */}
+            {onOpenTerminal && (
+              <button
+                type="button"
+                onClick={() => {
+                  onOpenTerminal();
+                  playClickSound();
+                }}
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.04] px-2.5 py-1.5 text-xs text-[#A0AEC0] transition hover:border-cyan-400/40 hover:text-cyan-300 active:scale-95 cursor-pointer"
+                title="Open Developer Terminal (` or Ctrl+\)"
+              >
+                <TerminalIcon className="h-3 w-3 text-cyan-400" />
+                <span className="font-mono text-[10px]">&gt;_</span>
+              </button>
+            )}
 
             {/* Audio Toggle */}
             <button
@@ -134,7 +167,7 @@ export default function Navbar({
                 setSoundMuted(next);
                 playClickSound();
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#A0AEC0] transition hover:border-white/25 hover:text-white active:scale-95"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#A0AEC0] transition hover:border-white/25 hover:text-white active:scale-95 cursor-pointer"
               title={soundMuted ? 'Unmute UI Audio' : 'Mute UI Audio'}
             >
               {soundMuted ? (
@@ -143,6 +176,26 @@ export default function Navbar({
                 <Volume2 className="h-3.5 w-3.5 text-[#00F0FF]" />
               )}
             </button>
+
+            {/* Theme Toggle (Light / Dark) */}
+            {onToggleTheme && (
+              <button
+                type="button"
+                onClick={() => {
+                  onToggleTheme();
+                  playClickSound();
+                }}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#A0AEC0] transition hover:border-[#F59E0B]/40 hover:text-[#F59E0B] active:scale-95 cursor-pointer"
+                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-3.5 w-3.5 text-[#F59E0B]" />
+                ) : (
+                  <Moon className="h-3.5 w-3.5 text-[#818CF8]" />
+                )}
+              </button>
+            )}
 
             {pktTime && (
               <div className="hidden xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] text-[#A0AEC0]">
@@ -213,6 +266,49 @@ export default function Navbar({
                   </a>
                 </li>
               ))}
+              <li className="mt-2 flex items-center justify-between border-t border-white/10 pt-3 px-2">
+                <span className="text-xs text-[#A0AEC0]">Appearance</span>
+                <div className="flex items-center gap-2">
+                  {onToggleTheme && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onToggleTheme();
+                        playClickSound();
+                      }}
+                      className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white"
+                    >
+                      {theme === 'dark' ? (
+                        <>
+                          <Sun className="h-3.5 w-3.5 text-[#F59E0B]" />
+                          <span>Light Mode</span>
+                        </>
+                      ) : (
+                        <>
+                          <Moon className="h-3.5 w-3.5 text-[#818CF8]" />
+                          <span>Dark Mode</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const next = toggleAudioMute();
+                      setSoundMuted(next);
+                      playClickSound();
+                    }}
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#A0AEC0]"
+                    title={soundMuted ? 'Unmute' : 'Mute'}
+                  >
+                    {soundMuted ? (
+                      <VolumeX className="h-3.5 w-3.5 text-red-400" />
+                    ) : (
+                      <Volume2 className="h-3.5 w-3.5 text-[#00F0FF]" />
+                    )}
+                  </button>
+                </div>
+              </li>
               <li className="mt-2 border-t border-white/10 pt-3">
                 <a
                   href="#contact"

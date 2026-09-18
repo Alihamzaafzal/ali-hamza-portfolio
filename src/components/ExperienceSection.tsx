@@ -81,12 +81,19 @@ export default function ExperienceSection() {
                   className="relative group rounded-2xl border border-white/10 bg-[#111318] p-7 md:p-8 transition-all duration-300 hover:border-white/25 hover:shadow-[0_16px_48px_rgba(0,0,0,0.6)] cursor-pointer"
                 >
                   <div onClick={() => playPopSound()}>
-                    {/* Glowing Timeline Node */}
+                    {/* Glowing Timeline Node with Double Ring Pulse */}
                     <div
-                      className="absolute -left-[29px] sm:-left-[39px] top-8 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#00F0FF] bg-[#0C0C0C] timeline-node-pulse z-10"
+                      className="absolute -left-[29px] sm:-left-[39px] top-8 z-10"
                       aria-hidden="true"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
+                      {/* Expanding ring 1 */}
+                      <span className="timeline-node-ring" />
+                      {/* Expanding ring 2 (delayed) */}
+                      <span className="timeline-node-ring timeline-node-ring-2" />
+                      {/* Core node */}
+                      <div className="relative flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#00F0FF] bg-[#0C0C0C]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF]" />
+                      </div>
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-3">

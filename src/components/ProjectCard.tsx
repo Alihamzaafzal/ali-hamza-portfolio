@@ -64,6 +64,8 @@ export default function ProjectCard({
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     el.style.transform = `perspective(1000px) rotateY(${x * 3.5}deg) rotateX(${-y * 3.5}deg)`;
+    el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   };
 
   const handleTiltLeave = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -113,8 +115,17 @@ export default function ProjectCard({
           onMouseLeave={handleTiltLeave}
           className="group relative overflow-hidden rounded-[28px] md:rounded-[36px] border border-white/12 bg-[#111318] shadow-[0_24px_64px_rgba(0,0,0,0.7)] transition-transform duration-200 ease-out"
         >
+        {/* Specular Radial Spotlight Glow */}
+        <div
+          className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(750px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.09), transparent 45%)`,
+          }}
+          aria-hidden="true"
+        />
+
         {/* Top specular edge highlight */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         {/* macOS Browser Window Header */}
         <div className="flex items-center justify-between border-b border-white/10 bg-[#0A0C12] px-6 py-3.5">

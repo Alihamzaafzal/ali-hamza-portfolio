@@ -24,22 +24,88 @@ const iconMap = {
   Sparkles,
 } as const;
 
-/* ═══ #7: Animated Progress Bar ═══ */
-function ProgressBar({ level, inView }: { level: number; inView: boolean }) {
+const R = 18;
+const CIRCUMFERENCE = 2 * Math.PI * R;
+const ARC_RATIO = 0.75; // 270° arc
+const ARC_LENGTH = CIRCUMFERENCE * ARC_RATIO;
+const GAP = CIRCUMFERENCE * (1 - ARC_RATIO);
+
+/** Premium radial arc gauge per skill */
+function ArcGauge({
+  level,
+  inView,
+  color = 'url(#arc-grad)',
+}: {
+  level: number;
+  inView: boolean;
+  color?: string;
+}) {
+  const offset = inView
+    ? ARC_LENGTH * (1 - level / 100)
+    : ARC_LENGTH;
+
   return (
-    <div className="h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
-      <div
-        className="h-full rounded-full bg-gradient-to-r from-[#06B6D4] to-[#A855F7] transition-all duration-1000 ease-out"
-        style={{ width: inView ? `${level}%` : '0%' }}
+    <svg
+      width="44"
+      height="44"
+      viewBox="0 0 44 44"
+      className="shrink-0"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="arc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stopColor="#06B6D4" />
+          <stop offset="100%" stopColor="#A855F7" />
+        </linearGradient>
+      </defs>
+      {/* Track */}
+      <circle
+        cx="22"
+        cy="22"
+        r={R}
+        className="arc-gauge-track"
+        strokeWidth="3"
+        strokeDasharray={`${ARC_LENGTH} ${GAP}`}
+        strokeDashoffset={0}
+        style={{ transform: 'rotate(135deg)', transformOrigin: '22px 22px' }}
       />
-    </div>
+      {/* Fill */}
+      <circle
+        cx="22"
+        cy="22"
+        r={R}
+        className="arc-gauge-fill"
+        strokeWidth="3"
+        stroke={color}
+        strokeDasharray={`${ARC_LENGTH} ${GAP}`}
+        strokeDashoffset={offset}
+        style={{
+          transform: 'rotate(135deg)',
+          transformOrigin: '22px 22px',
+          transitionDelay: inView ? '0.1s' : '0s',
+          filter: 'drop-shadow(0 0 4px rgba(6,182,212,0.6))',
+        }}
+      />
+      {/* Percentage label */}
+      <text
+        x="22"
+        y="25"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="white"
+        fontSize="8"
+        fontWeight="600"
+        fontFamily="Space Grotesk, monospace"
+      >
+        {level}
+      </text>
+    </svg>
   );
 }
 
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  /* ═══ #13: Spotlight mouse glow handler ═══ */
   const handleSpotlight = (e: MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const rect = el.getBoundingClientRect();
@@ -130,17 +196,11 @@ function SkillCard({
         <h3 className="font-syne text-xl font-bold text-white">
           {category.name}
         </h3>
-        <ul className="mt-5 space-y-3.5 border-t border-white/10 pt-4">
+        <ul className="mt-5 space-y-4 border-t border-white/10 pt-4">
           {category.skills.map((skill) => (
-            <li key={skill.name}>
-              <div className="flex items-center justify-between text-sm text-[#D7E2EA] mb-1.5">
-                <span>{skill.name}</span>
-                <span className="font-mono text-xs text-[#A0AEC0]">
-                  {skill.level}%
-                </span>
-              </div>
-              {/* ═══ #7: Animated Progress Bar ═══ */}
-              <ProgressBar level={skill.level} inView={isInView} />
+            <li key={skill.name} className="flex items-center justify-between gap-3">
+              <span className="text-sm text-[#D7E2EA] flex-1 min-w-0 truncate">{skill.name}</span>
+              <ArcGauge level={skill.level} inView={isInView} />
             </li>
           ))}
         </ul>
